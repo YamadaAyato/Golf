@@ -202,6 +202,13 @@
       "dependencies": {},
       "url": "https://packages.unity.com"
     },
+    "com.unity.nuget.newtonsoft-json": {
+      "version": "3.2.1",
+      "depth": 1,
+      "source": "registry",
+      "dependencies": {},
+      "url": "https://packages.unity.com"
+    },
     "com.unity.render-pipelines.core": {
       "version": "17.0.4",
       "depth": 1,
@@ -329,6 +336,15 @@
         "com.unity.modules.jsonserialize": "1.0.0"
       },
       "url": "https://packages.unity.com"
+    },
+    "template": {
+      "version": "https://github.com/MiyamotoKaito/MySoloDevelopSetUp.git?path=MySoloDevelopSetUp/Assets/Template",
+      "depth": 0,
+      "source": "git",
+      "dependencies": {
+        "com.unity.nuget.newtonsoft-json": "3.2.1"
+      },
+      "hash": "3ed4d4e685885539cb3859b06b7a5adcb1a7861a"
     },
     "com.unity.modules.accessibility": {
       "version": "1.0.0",
