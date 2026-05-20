@@ -141,6 +141,7 @@ public class BallShoter : MonoBehaviour
         _shotPowerUI.ResetGauge();
         _putterSwing.Swing();
         _shotPowerUI.gameObject.SetActive(false);
+        OnShot?.Invoke();
     }
 
     /// <summary>
