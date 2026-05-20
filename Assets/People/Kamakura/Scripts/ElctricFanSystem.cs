@@ -1,10 +1,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class NewMonoBehaviourScript : MonoBehaviour
+public class ElctricFanSystem : MonoBehaviour
 {
 
-    public Transform _thisTrasform;
     private Rigidbody2D _targetRb;
 
     [Header("  扇風機の強さ  ")]
@@ -16,10 +15,6 @@ public class NewMonoBehaviourScript : MonoBehaviour
     private string _targetTag = "Player";
 
 
-    private void Start()
-    {
-        _thisTrasform = GetComponent<Transform>();
-    }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
@@ -31,7 +26,7 @@ public class NewMonoBehaviourScript : MonoBehaviour
     private void OnTriggerStay2D(Collider2D collision)
     {
         if (_targetRb == null) return;
-        _targetRb.AddForce(_thisTrasform.up * _force, ForceMode2D.Force);
+        _targetRb.AddForce(transform.up * _force, ForceMode2D.Force);
     }
 
     private void OnTriggerExit2D(Collider2D collision)
