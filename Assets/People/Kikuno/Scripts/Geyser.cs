@@ -44,6 +44,8 @@ public class Geyser : GimmickBase
             else
             {
                 _ps.Stop();
+                _boxCol.size = _startBoxColSize;
+                _boxCol.offset = _startOffset;
                 _time = 0f;
                 _keepTime = 0f;
             }

@@ -106,7 +106,7 @@ MonoBehaviour:
   _rotateDuration: 0.3
   _rotateAngle: 30
   _rotateEase: 15
-  _waterStartTime: 0.5
+  _waterStartTime: 3
   _waterKeepTime: 2.5
   _force: 32
   _maxSizeCount: 5
