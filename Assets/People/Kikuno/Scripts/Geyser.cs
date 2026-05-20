@@ -2,6 +2,7 @@ using UnityEngine;
 
 public class Geyser : GimmickBase
 {
+    [SerializeField] private BoxCollider2D _boxCol;
     [SerializeField] private float _waterStartTime;
     [SerializeField] private float _waterKeepTime;
     [SerializeField] private float _force;
@@ -11,14 +12,12 @@ public class Geyser : GimmickBase
     private float _time;
     private float _keepTime;
     private Vector2 _startOffset;
-    private BoxCollider2D _boxCol;
     private Vector2 _startBoxColSize;
     private ParticleSystem _ps;
     private ParticleSystemRenderer _renderer;
 
     void Start()
     {
-        _boxCol = GetComponent<BoxCollider2D>();
         _ps = GetComponent<ParticleSystem>();
         _renderer = GetComponent<ParticleSystemRenderer>();
         _ps.Stop();
