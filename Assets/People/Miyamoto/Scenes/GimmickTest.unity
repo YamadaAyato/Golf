@@ -429,6 +429,59 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f7bf40e08a00cdc44a3960a5ad11069d, type: 3}
+--- !u!1 &1317089436
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1317089438}
+  - component: {fileID: 1317089437}
+  m_Layer: 0
+  m_Name: MissionManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1317089437
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1317089436}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: efa274e9d1d2abe498e8a7f7941c448e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _missions:
+  - rid: 5186415503701966921
+  references:
+    version: 2
+    RefIds:
+    - rid: 5186415503701966921
+      type: {class: CoinMission, ns: , asm: Assembly-CSharp}
+      data:
+        _coinMissionText: {fileID: 0}
+--- !u!4 &1317089438
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1317089436}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 733.5909, y: 921.64124, z: -13.924244}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2098508373
 GameObject:
   m_ObjectHideFlags: 0
@@ -441,6 +494,7 @@ GameObject:
   - component: {fileID: 2098508376}
   - component: {fileID: 2098508375}
   - component: {fileID: 2098508374}
+  - component: {fileID: 2098508378}
   m_Layer: 5
   m_Name: Canvas
   m_TagString: Untagged
@@ -531,6 +585,18 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
+--- !u!114 &2098508378
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2098508373}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9d8db15a6e87438448bf24fc95903ca1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1369819542949352262
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -539,6 +605,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2269383001474483567, guid: f7bf40e08a00cdc44a3960a5ad11069d, type: 3}
+      propertyPath: _rotateEase
+      value: 28
+      objectReference: {fileID: 0}
     - target: {fileID: 2269383001474483567, guid: f7bf40e08a00cdc44a3960a5ad11069d, type: 3}
       propertyPath: _selectDirection
       value: 
@@ -698,3 +768,4 @@ SceneRoots:
   - {fileID: 1256162919}
   - {fileID: 2098508377}
   - {fileID: 53827733}
+  - {fileID: 1317089438}
