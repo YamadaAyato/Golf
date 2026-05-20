@@ -1,4 +1,4 @@
-using NUnit.Framework;
+using DG.Tweening;
 using UnityEngine;
 
 public class FerrisWheelRotate : GimmickBase
@@ -8,6 +8,7 @@ public class FerrisWheelRotate : GimmickBase
 
     private Vector3 _centerPosition;
     private Quaternion[] _defaultRotations;
+    private Tween _rotateTween;
 
     void Start()
     {
@@ -17,30 +18,48 @@ public class FerrisWheelRotate : GimmickBase
          _rotateGameObjects[1].position) / 2f;
         // 各オブジェクトの初期回転を保存
         _defaultRotations = new Quaternion[_rotateGameObjects.Length];
-        
-        
+
+
         for (int i = 0; i < _rotateGameObjects.Length; i++)
         {
             _defaultRotations[i] =
                 _rotateGameObjects[i].rotation;
         }
-}
+    }
     // 回転処理をオーバーライド
     protected override void Rotate(int dir)
     {
-        // 各オブジェクトを中心位置を軸に回転させる
-        for (int i = 0; i < _rotateGameObjects.Length; i++)
-        {
-            _rotateGameObjects[i].RotateAround(
-                _centerPosition,
-                Vector3.forward,
-                _rotateAngle * -dir
-            );
+        // 既存の回転アニメーションがあれば停止
+        _rotateTween?.Kill();
 
-            // 回転後にオブジェクトの回転を初期回転にリセット
-            _rotateGameObjects[i].rotation =
-                _defaultRotations[i];
-        }
+        float previousAngle = 0f;
+        float targetAngle = _rotateAngle * -dir;
+
+        _rotateTween = DOVirtual.Float(
+                  0f,
+                  targetAngle,
+                  _rotateDuration,
+                  currentAngle =>
+                  {
+                      float deltaAngle = currentAngle - previousAngle;
+                      previousAngle = currentAngle;
+
+                      // 各オブジェクトを中心位置を軸に回転させる
+                      for (int i = 0; i < _rotateGameObjects.Length; i++)
+                      {
+                          _rotateGameObjects[i].RotateAround(
+                              _centerPosition,
+                              Vector3.forward,
+                              deltaAngle);
+
+                          _rotateGameObjects[i].rotation = _defaultRotations[i];
+                      }
+                  })
+              .SetEase(_rotateEase)
+              .OnComplete(() =>
+              {
+                  _selectDirection.OnSelectDirection -= Rotate;
+              });
     }
 
     //void Update()

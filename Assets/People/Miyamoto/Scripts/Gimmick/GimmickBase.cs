@@ -11,7 +11,8 @@ public class GimmickBase : MonoBehaviour, IPointerClickHandler
     [SerializeField] protected float _rotateDuration;
     [SerializeField] protected float _rotateAngle;
     [SerializeField] protected Ease _rotateEase;
-    private SelectDirection _selectDirection;
+    protected SelectDirection _selectDirection;
+
     /// <summary>
     ///     ポインターのクリック操作を処理する。
     /// </summary>

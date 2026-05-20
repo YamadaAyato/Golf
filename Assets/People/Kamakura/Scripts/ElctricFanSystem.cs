@@ -1,20 +1,15 @@
-using System.Collections.Generic;
 using UnityEngine;
 
 public class ElctricFanSystem : MonoBehaviour
 {
-
-    private Rigidbody2D _targetRb;
-
-    [Header("  扇風機の強さ  ")]
+    [Header(" 風の強さ ")]
     [SerializeField]
     private float _force = 10f;
-
-    [Header("  対象のタグ  ")]
+    [Header(" 対象のタグ ")]
     [SerializeField]
     private string _targetTag = "Player";
 
-
+    private Rigidbody2D _targetRb;
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
@@ -23,6 +18,7 @@ public class ElctricFanSystem : MonoBehaviour
             _targetRb = collision.GetComponent<Rigidbody2D>();
         }
     }
+
     private void OnTriggerStay2D(Collider2D collision)
     {
         if (_targetRb == null) return;
