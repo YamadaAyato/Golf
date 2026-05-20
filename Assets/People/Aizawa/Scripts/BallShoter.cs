@@ -1,3 +1,4 @@
+using Template.Editor;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -12,7 +13,7 @@ public class BallShoter : MonoBehaviour
     private float _maxShotPower;
     [SerializeField]
     private float _shotPowerBase;
-    [SerializeField]
+    [SerializeField,ReadOnly]
     private ShotPhase _nowPhase;
 
     private Rigidbody2D _rb2d;
@@ -22,6 +23,8 @@ public class BallShoter : MonoBehaviour
     private float _shotPower = 0;
     private float _relativeDirection = 1;
     private RaycastHit2D _onGroundChecker;
+    private Transform _startPoint;
+    private bool _canEnterShotMode;
 
     /// <summary>
     /// ボールの発射の進行度を発射中・角度決定・力決定の3段階で分ける。
@@ -31,6 +34,11 @@ public class BallShoter : MonoBehaviour
         Wait,
         Angle,
         Power
+    }
+
+    public void Initialie(Transform startPoint)
+    {
+        _startPoint = startPoint;
     }
 
     void Awake()
@@ -55,12 +63,24 @@ public class BallShoter : MonoBehaviour
         }
         else if (_nowPhase == ShotPhase.Wait && _rb2d.linearVelocity.magnitude < 0.1f)
         {
+            if (Keyboard.current.spaceKey.wasPressedThisFrame)
+            {
+                _canEnterShotMode = true;
+            }
+
+            if (_canEnterShotMode == false)
+            {
+                return;
+            }
+
             _onGroundChecker = Physics2D.Linecast(transform.position  - new Vector3(0, 0.5f), transform.position - new Vector3(0, 0.6f));
 
             if(_onGroundChecker.collider != null)
             {
                 _rb2d.linearVelocity = Vector2.zero;
                 _nowPhase = ShotPhase.Angle;
+                _canEnterShotMode = false;
+
                 _shotPowerUI.gameObject.SetActive(true);
                 _putterSwing.gameObject.SetActive(true);
                 _putterSwing.transform.SetParent(transform);
@@ -126,6 +146,26 @@ public class BallShoter : MonoBehaviour
     /// </summary>
     void FallOutScreen()
     {
-        Destroy(gameObject);
+        if (_startPoint == null)
+        {
+            Debug.LogError("StartPointが設定されていません。");
+            return;
+        }
+
+        _rb2d.linearVelocity = Vector2.zero;
+        _rb2d.angularVelocity = 0f;
+
+        transform.position = _startPoint.position;
+        transform.rotation = Quaternion.identity;
+
+        _shotAngle = 0f;
+        _shotPower = 0f;
+        _relativeDirection = 1f;
+        _nowPhase = ShotPhase.Wait;
+        _canEnterShotMode = false;
+
+        _shotPowerUI.ResetGauge();
+        _shotPowerUI.gameObject.SetActive(false);
+        _putterSwing.gameObject.SetActive(false);
     }
 }
