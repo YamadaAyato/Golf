@@ -14,9 +14,9 @@ public class StandardRotate : GimmickBase
 
     protected override void Rotate(int dir)
     {
-        Transform ParentTransform = GetComponentInParent<Transform>();
+        var ParentTransform = transform.parent;
         var currentRotation = ParentTransform.rotation.eulerAngles;
-        transform
+        ParentTransform
             .DORotate(
                 new Vector3(
                     currentRotation.x,
