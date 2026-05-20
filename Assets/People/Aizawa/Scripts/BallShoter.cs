@@ -7,21 +7,21 @@ using UnityEngine.InputSystem;
 public class BallShoter : MonoBehaviour
 {
     [SerializeField]
-    ShotPowerUI _shotPowerUI;
+    private ShotPowerUI _shotPowerUI;
     [SerializeField]
-    float _maxShotPower;
+    private float _maxShotPower;
     [SerializeField]
-    float _shotPowerBase;
+    private float _shotPowerBase;
     [SerializeField]
-    ShotPhase _nowPhase;
+    private ShotPhase _nowPhase;
 
-    Rigidbody2D _rb2d;
-    PutterSwing _putterSwing;
+    private Rigidbody2D _rb2d;
+    private PutterSwing _putterSwing;
 
-    float _shotAngle = 0;
-    float _shotPower = 0;
-    float _relativeDirection = 1;
-    RaycastHit2D _onGroundChecker;
+    private float _shotAngle = 0;
+    private float _shotPower = 0;
+    private float _relativeDirection = 1;
+    private RaycastHit2D _onGroundChecker;
 
     /// <summary>
     /// ボールの発射の進行度を発射中・角度決定・力決定の3段階で分ける。
@@ -108,7 +108,7 @@ public class BallShoter : MonoBehaviour
     void Shot()
     {
         _putterSwing.transform.parent = null;
-        
+
         transform.eulerAngles = _shotPowerUI.transform.eulerAngles;
         _relativeDirection = 1;
         _rb2d.AddForce(transform.right * _shotPowerBase * (Mathf.PingPong(_shotPower += 1.5f, _maxShotPower) / _maxShotPower), ForceMode2D.Impulse);
