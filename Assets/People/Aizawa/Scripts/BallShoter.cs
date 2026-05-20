@@ -1,3 +1,4 @@
+using System;
 using Template.Editor;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -7,6 +8,7 @@ using UnityEngine.InputSystem;
 /// </summary>
 public class BallShoter : MonoBehaviour
 {
+    public event Action OnShot;
     [SerializeField]
     private ShotPowerUI _shotPowerUI;
     [SerializeField]
