@@ -6,7 +6,7 @@ using UnityEngine.EventSystems;
 /// <summary>
 ///     ギミックの基底クラス
 /// </summary>
-public virtual class GimmickBase : MonoBehaviour, IPointerClickHandler
+public class GimmickBase : MonoBehaviour, IPointerClickHandler
 {
     /// <summary>
     ///     ポインターのクリック操作を処理する。
