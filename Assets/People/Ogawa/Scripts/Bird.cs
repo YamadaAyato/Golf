@@ -2,52 +2,64 @@ using UnityEngine;
 
 public class Bird : MonoBehaviour
 {
-    [SerializeField] private Transform positionA;
-    [SerializeField] private Transform positionB;
+    [SerializeField] private Transform[] _targetPositions;
+    [SerializeField] private float _moveSpeed = 3f;
 
-    [SerializeField] private float moveSpeed = 3f;
+    private int _currentTargetIndex;
+    private SpriteRenderer _sp;
 
-    Transform goal;
-
-    SpriteRenderer sp;
-
-    void Start()
+    private void Start()
     {
-        goal = positionB;
+        if (!TryGetComponent(out _sp))
+        {
+            Debug.LogError("SpriteRendererが存在しません。", this);
+            enabled = false;
+            return;
+        }
 
-        sp = GetComponent<SpriteRenderer>();
+        if (_targetPositions == null || _targetPositions.Length <= 1)
+        {
+            Debug.LogError("ターゲット位置は2個以上必要です。", this);
+            enabled = false;
+            return;
+        }
+
+        _currentTargetIndex = 1;
     }
 
-    void Update()
+    private void Update()
     {
-        // 移動
-        transform.position = Vector3.MoveTowards
-            (transform.position, goal.position, moveSpeed * Time.deltaTime);
+        // 現在の移動先を取得する。
+        Transform targetPoint = _targetPositions[_currentTargetIndex];
 
-        // flip向きの変更
-        sp.flipX = goal.position.x < transform.position.x;
+        // 現在の位置から移動先に向かって移動する。
+        transform.position = Vector3.MoveTowards(
+            transform.position,
+            targetPoint.position,
+            _moveSpeed * Time.deltaTime);
 
-        // 着いたら切り替え
-        if (Vector3.Distance(transform.position, goal.position) < 0.1f)
+        // 移動先の位置に応じて、スプライトの向きを変える。
+        _sp.flipX = targetPoint.position.x < transform.position.x;
+
+        // 移動先の位置に十分近づいたら、次の移動先を設定する。
+        if (Vector3.Distance(transform.position, targetPoint.position) < 0.1f)
         {
-            if (goal == positionB)
-            {
-                goal = positionA;
-            }
-            else
-            {
-                goal = positionB;
-            }
+            _currentTargetIndex = (_currentTargetIndex + 1) % _targetPositions.Length;
         }
     }
 
-    void OnCollisionEnter2D(Collision2D collision)
+    private void OnCollisionEnter2D(Collision2D collision)
     {
-        Rigidbody2D rigi = collision.rigidbody;
+        if (!collision.gameObject.CompareTag("Ball")) return;
 
-        if (rigi != null)
+        if (collision.gameObject.TryGetComponent(out Rigidbody2D targetRb))
         {
-            rigi.linearVelocity = new Vector2(0, rigi.linearVelocity.y);
+            targetRb.linearVelocity = new Vector2(0f, targetRb.linearVelocity.y);
+
+            if (this.gameObject.TryGetComponent(out Collider2D collider))
+            {
+                collider.enabled = false;
+            }
         }
     }
 }
