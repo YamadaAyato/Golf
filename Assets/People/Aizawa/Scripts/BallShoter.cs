@@ -16,10 +16,12 @@ public class BallShoter : MonoBehaviour
     ShotPhase _nowPhase;
 
     Rigidbody2D _rb2d;
+    PutterSwing _putterSwing;
 
     float _shotAngle = 0;
     float _shotPower = 0;
     float _relativeDirection = 1;
+    RaycastHit2D _onGroundChecker;
 
     /// <summary>
     /// ボールの発射の進行度を発射中・角度決定・力決定の3段階で分ける。
@@ -34,6 +36,7 @@ public class BallShoter : MonoBehaviour
     void Awake()
     {
         _rb2d = GetComponent<Rigidbody2D>();
+        _putterSwing = transform.GetChild(0).GetComponent<PutterSwing>();
     }
 
     void Update()
@@ -52,10 +55,18 @@ public class BallShoter : MonoBehaviour
         }
         else if (_nowPhase == ShotPhase.Wait && _rb2d.linearVelocity.magnitude < 0.1f)
         {
-            _rb2d.linearVelocity = Vector2.zero;
-            _nowPhase = ShotPhase.Angle;
-            _shotPowerUI.gameObject.SetActive(true);
-            _shotPowerUI.transform.position = transform.position;
+            _onGroundChecker = Physics2D.Linecast(transform.position  - new Vector3(0, 0.5f), transform.position - new Vector3(0, 0.6f));
+
+            if(_onGroundChecker.collider != null)
+            {
+                _rb2d.linearVelocity = Vector2.zero;
+                _nowPhase = ShotPhase.Angle;
+                _shotPowerUI.gameObject.SetActive(true);
+                _putterSwing.gameObject.SetActive(true);
+                _putterSwing.transform.SetParent(transform);
+                _putterSwing.BackPosition();
+                _shotPowerUI.transform.position = transform.position;
+            }
         }
     }
 
@@ -71,16 +82,20 @@ public class BallShoter : MonoBehaviour
                 _shotPowerUI.transform.eulerAngles = transform.eulerAngles = new Vector2(0, _relativeDirection == 1 ? 0 : 180);
             }
 
-            _shotPowerUI.RotateAngle(Mathf.PingPong(_shotAngle += 1.5f, 90));
+            float processedAngle = Mathf.PingPong(_shotAngle += 2f, 90);
+            _shotPowerUI.RotateAngle(processedAngle);
+            _putterSwing.ArrangeAngle(processedAngle);
         }
         else if(_nowPhase == ShotPhase.Power)
         {
-            _shotPowerUI.SelectPower(Mathf.PingPong(_shotPower += 1.5f, _maxShotPower) / _maxShotPower);
+            float processedPower = Mathf.PingPong(_shotPower += 1.5f, _maxShotPower) / _maxShotPower;
+            _shotPowerUI.SelectPower(processedPower);
+            _putterSwing.ArrangePower(processedPower);
         }
         else
         {
             var viewPoint = Camera.main.WorldToViewportPoint(transform.position);
-            if(viewPoint.x > 1 || viewPoint.x < 0 || viewPoint.y > 1 || viewPoint.y < 0)
+            if(viewPoint.x > 1 || viewPoint.x < 0 || viewPoint.y < 0)
             {
                 FallOutScreen();
             }
@@ -92,13 +107,17 @@ public class BallShoter : MonoBehaviour
     /// </summary>
     void Shot()
     {
+        _putterSwing.transform.parent = null;
+        
         transform.eulerAngles = _shotPowerUI.transform.eulerAngles;
+        _relativeDirection = 1;
         _rb2d.AddForce(transform.right * _shotPowerBase * (Mathf.PingPong(_shotPower += 1.5f, _maxShotPower) / _maxShotPower), ForceMode2D.Impulse);
 
         _shotAngle = 0;
         _shotPower = 0;
         transform.eulerAngles = _shotPowerUI.transform.eulerAngles = Vector3.zero;
         _shotPowerUI.ResetGauge();
+        _putterSwing.Swing();
         _shotPowerUI.gameObject.SetActive(false);
     }
 
