@@ -7,6 +7,8 @@ public class SelectDirection : MonoBehaviour
 {
     public event Action<int> OnSelectDirection;
 
+    //親オブジェクトに付けることで、子オブジェクトからクリックイベントを受け取るクラス
+
     private void SelectHandler(InputAction.CallbackContext ctx)
     {
         if(!_isSelecting) return;
