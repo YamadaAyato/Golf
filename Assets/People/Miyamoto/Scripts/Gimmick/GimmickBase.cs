@@ -8,18 +8,18 @@ using UnityEngine.EventSystems;
 /// </summary>
 public class GimmickBase : MonoBehaviour, IPointerClickHandler
 {
-    public event Action OnSelect;
-
     [SerializeField] protected float _rotateDuration;
     [SerializeField] protected float _rotateAngle;
     [SerializeField] protected Ease _rotateEase;
-    protected SelectDirection _selectDirection;
+    private SelectDirection _selectDirection;
     /// <summary>
     ///     ポインターのクリック操作を処理する。
     /// </summary>
     public void OnPointerClick(PointerEventData eventData)
     {
-        OnSelect?.Invoke();
+        _selectDirection.Selecting();
+        _selectDirection.OnSelectDirection -= Rotate;
+        _selectDirection.OnSelectDirection += Rotate;
     }
 
     /// <summary>
@@ -37,14 +37,12 @@ public class GimmickBase : MonoBehaviour, IPointerClickHandler
                     currentRotation.z += _rotateAngle* -dir),
                 _rotateDuration)
             .SetEase(_rotateEase);
+
+        _selectDirection.OnSelectDirection -= Rotate;
     }
     private void Awake()
     {
         _selectDirection = FindAnyObjectByType<SelectDirection>();
-    }
-    private void OnEnable()
-    {
-        _selectDirection.OnSelectDirection += Rotate;
     }
     private void OnDisable()
     {
