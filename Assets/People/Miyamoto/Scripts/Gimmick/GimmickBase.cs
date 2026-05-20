@@ -10,10 +10,10 @@ public class GimmickBase : MonoBehaviour, IPointerClickHandler
 {
     public event Action OnSelect;
 
-    [SerializeField] private float _rotateDuration;
-    [SerializeField] private float _rotateAngle;
-    [SerializeField] private Ease _rotateEase;
-    private SelectDirection _selectDirection;
+    [SerializeField] protected float _rotateDuration;
+    [SerializeField] protected float _rotateAngle;
+    [SerializeField] protected Ease _rotateEase;
+    protected SelectDirection _selectDirection;
     /// <summary>
     ///     ポインターのクリック操作を処理する。
     /// </summary>
