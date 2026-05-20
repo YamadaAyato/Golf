@@ -6,7 +6,8 @@ using UnityEngine.UI;
 /// </summary>
 public class ShotPowerUI : MonoBehaviour
 {
-    public Image _gaugeImage;
+    [SerializeField]
+    Image _gaugeImage;
 
     void Awake()
     {

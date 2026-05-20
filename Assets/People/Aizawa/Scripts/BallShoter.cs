@@ -6,13 +6,19 @@ using UnityEngine.InputSystem;
 /// </summary>
 public class BallShoter : MonoBehaviour
 {
-    public ShotPowerUI _shotPowerUI;
+    [SerializeField]
+    ShotPowerUI _shotPowerUI;
+    [SerializeField]
+    float _maxShotPower;
+    [SerializeField]
+    float _shotPowerBase;
+    [SerializeField]
+    ShotPhase _nowPhase;
+
     Rigidbody2D _rb2d;
 
     float _shotAngle = 0;
-    public float _maxShotPower;
     float _shotPower = 0;
-    public float _shotPowerBase;
     float _relativeDirection = 1;
 
     /// <summary>
@@ -24,7 +30,6 @@ public class BallShoter : MonoBehaviour
         Angle,
         Power
     }
-    public ShotPhase _nowPhase;
 
     void Awake()
     {
