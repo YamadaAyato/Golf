@@ -60,5 +60,6 @@ public class Geyser : GimmickBase
     {
         rb = collision.GetComponent<Rigidbody2D>();
         rb.AddForce(transform.up * _force, ForceMode2D.Impulse);
+        AudioManager.Instance.PlaySE("Water");
     }
 }

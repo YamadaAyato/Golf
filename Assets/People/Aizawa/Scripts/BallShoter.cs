@@ -134,6 +134,7 @@ public class BallShoter : MonoBehaviour
         transform.eulerAngles = _shotPowerUI.transform.eulerAngles;
         _relativeDirection = 1;
         _rb2d.AddForce(transform.right * _shotPowerBase * (Mathf.PingPong(_shotPower += 1.5f, _maxShotPower) / _maxShotPower), ForceMode2D.Impulse);
+        AudioManager.Instance.PlaySE("Shot");
 
         _shotAngle = 0;
         _shotPower = 0;
