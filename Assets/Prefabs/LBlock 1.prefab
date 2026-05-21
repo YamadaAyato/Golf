@@ -229,7 +229,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _rotateDuration: 1
   _rotateAngle: 60
-  _rotateEase: 0
+  _rotateEase: 5
 --- !u!1 &6472332829108571726
 GameObject:
   m_ObjectHideFlags: 0

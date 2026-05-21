@@ -610,7 +610,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _rotateDuration: 0.4
   _rotateAngle: 30
-  _rotateEase: 0
+  _rotateEase: 8
   _rotateGameObjects:
   - {fileID: 7918019862128624904}
   - {fileID: 1896331031927050516}
