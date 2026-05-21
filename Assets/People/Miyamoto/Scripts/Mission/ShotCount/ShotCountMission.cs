@@ -28,7 +28,7 @@ public class ShotCountMission : IMission, IDisposable
     }
     private void TextUpdate()
     {
-        _shotCountText.text = $"{_shotCount}/{_maxShotCount}";
+        _shotCountText.text = $"{_shotCount}/{_maxShotCount}回以内にゴールしろ";
     }
     [SerializeField] private int _maxShotCount;
     [SerializeField] private TMP_Text _shotCountText;
