@@ -6,6 +6,7 @@ public class Ball : MonoBehaviour
     {
         if(collision.CompareTag("Goal"))
         {
+            FadeSceneLoader.Instance.LoadScene("StageSelect");
             Debug.Log("Goal!");
         }
     }

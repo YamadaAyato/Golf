@@ -12,16 +12,9 @@ public class StageInfo
     public void LoadClearInfo()
     {
         var clearedCount = _stageData.GetClearedCount(_stars.Length);
-        for (var i = 0; i < _stars.Length; i++)
+        for (var i = 0; i < clearedCount; i++)
         {
-            if (i < clearedCount)
-            {
-                _stars[i].color = Color.yellow;
-            }
-            else
-            {
-                _stars[i].color = Color.gray;
-            }
+            _stars[i].color = Color.yellow;
         }
     }
 }

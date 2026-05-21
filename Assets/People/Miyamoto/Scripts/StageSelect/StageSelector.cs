@@ -1,6 +1,6 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
-using UnityEngine.UI;
+using System.Linq;
 
 public class StageSelector : MonoBehaviour
 {
@@ -11,6 +11,10 @@ public class StageSelector : MonoBehaviour
     {
         _inputAction = new();
         _stageInfos[0].Image.color = Color.red;
+        foreach (var stageInfo in _stageInfos)
+        {
+            stageInfo.LoadClearInfo();
+        }
     }
     private void OnEnable()
     {
@@ -44,7 +48,7 @@ public class StageSelector : MonoBehaviour
     {
         StageDataManager.SetStageInfo(_stageInfos[_currentStageIndex].StageData,
                                       _stageInfos[_currentStageIndex].Stage);
-        SceneLoarder.LoadScene("Stage");
+        FadeSceneLoader.Instance.LoadScene("InGame");
     }
     private void SetCurrentIndex(int nextIndex)
     {
