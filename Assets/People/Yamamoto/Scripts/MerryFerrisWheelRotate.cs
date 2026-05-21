@@ -119,19 +119,4 @@ public class MerryFerrisWheelRotate : GimmickBase
             );
         }
     }
-
-    //void Update()
-    //{
-    //    for (int i = 0; i < _rotateGameObjects.Length; i++)
-    //    {
-    //        _rotateGameObjects[i].RotateAround(
-    //            _centerPosition,
-    //            Vector3.forward,
-    //            90 * Time.deltaTime
-    //        );
-
-    //        _rotateGameObjects[i].rotation =
-    //            _defaultRotations[i];
-    //    }
-    //}
 }
