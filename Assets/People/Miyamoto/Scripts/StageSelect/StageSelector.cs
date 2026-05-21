@@ -5,12 +5,13 @@ using System.Linq;
 public class StageSelector : MonoBehaviour
 {
     [SerializeField] StageInfo[] _stageInfos;
+    [SerializeField] Color _color;
     private GolfInputAction _inputAction;
     private int _currentStageIndex;
     private void Awake()
     {
         _inputAction = new();
-        _stageInfos[0].Image.color = Color.red;
+        _stageInfos[0].Image.color = _color;
         foreach (var stageInfo in _stageInfos)
         {
             stageInfo.LoadClearInfo();
@@ -41,6 +42,7 @@ public class StageSelector : MonoBehaviour
         if (nextIndex < 0 || nextIndex > _stageInfos.Length - 1)
             return;
 
+        AudioManager.Instance.PlaySE("");
         ImageUpdate(nextIndex);
         SetCurrentIndex(nextIndex);
     }
@@ -57,6 +59,6 @@ public class StageSelector : MonoBehaviour
     private void ImageUpdate(int nextIndex)
     {
         _stageInfos[_currentStageIndex].Image.color = Color.white;
-        _stageInfos[nextIndex].Image.color = Color.red;
+        _stageInfos[nextIndex].Image.color = _color;
     }
 }
