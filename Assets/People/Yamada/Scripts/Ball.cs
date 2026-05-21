@@ -1,4 +1,6 @@
+using System.Threading.Tasks;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Ball : MonoBehaviour
 {
@@ -6,8 +8,15 @@ public class Ball : MonoBehaviour
     {
         if(collision.CompareTag("Goal"))
         {
-            FadeSceneLoader.Instance.LoadScene("StageSelect");
+            LoadSceneMode();
             Debug.Log("Goal!");
         }
+    }
+
+    private async void LoadSceneMode()
+    {
+        AudioManager.Instance.PlaySE("Clear");
+        await Task.Delay(3000);
+        FadeSceneLoader.Instance.LoadScene("StageSelect");
     }
 }
