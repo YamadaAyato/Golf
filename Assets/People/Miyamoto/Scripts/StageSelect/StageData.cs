@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using System.Xml.Linq;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "StageData", menuName = "Scriptable Objects/StageData")]
@@ -37,5 +36,6 @@ public class StageData : ScriptableObject
     public void ResetClearInfo()
     {
         PlayerPrefs.DeleteKey(SaveKey);
+        PlayerPrefs.Save();
     }
 }

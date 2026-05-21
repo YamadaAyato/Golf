@@ -14,8 +14,8 @@ public static class StageDataManager
         Stage = stage;
         Debug.Log($"ステージの情報を追加{stageData.name}");
     }
-    public static StageData GetCurrentStageData()
+    public static (StageData StageData, GameObject Stage) GetCurrentStageData()
     {
-        return StageData;
+        return (StageData, Stage);
     }
 }
