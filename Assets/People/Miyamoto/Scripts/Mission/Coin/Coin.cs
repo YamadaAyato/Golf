@@ -10,6 +10,7 @@ public class Coin : MonoBehaviour
         {
             OnCoinGet?.Invoke();
             this.gameObject.SetActive(false);
+            AudioManager.Instance.PlaySE("Coin");
         }
     }
 }

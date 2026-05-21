@@ -16,6 +16,7 @@ public class ElctricFanSystem : MonoBehaviour
         if (collision.gameObject.CompareTag(_targetTag))
         {
             _targetRb = collision.GetComponent<Rigidbody2D>();
+            AudioManager.Instance.PlaySE("Wind");
         }
     }
 

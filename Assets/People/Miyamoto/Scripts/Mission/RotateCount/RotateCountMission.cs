@@ -1,6 +1,5 @@
 using System;
 using TMPro;
-using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 
 public class RotateCountMission : IMission, IDisposable
@@ -19,8 +18,8 @@ public class RotateCountMission : IMission, IDisposable
 
     public void Dispose()
     {
-            _selectDirection.OnSelectDirection -= OnRotateHandler;
-        
+        _selectDirection.OnSelectDirection -= OnRotateHandler;
+
         _selectDirection = null;
     }
     private void TextUpdate()
