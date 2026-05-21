@@ -6,7 +6,7 @@ public class GimmickClickRelay : MonoBehaviour, IPointerClickHandler
     [SerializeField]
     private GimmickBase _target;
 
-    //子オブジェクトに付けることで、クリックイベントをGimmickBaseに転送するクラス
+    //子オブジェクトに付けることで、クリックイベントを親オブジェクトのGimmickBaseに伝えるクラス
     // ポインターのクリック操作を処理する。
     public void OnPointerClick(PointerEventData eventData)
     {
