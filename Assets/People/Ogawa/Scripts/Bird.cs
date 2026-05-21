@@ -39,7 +39,7 @@ public class Bird : MonoBehaviour
             _moveSpeed * Time.deltaTime);
 
         // 移動先の位置に応じて、スプライトの向きを変える。
-        _sp.flipX = targetPoint.position.x < transform.position.x;
+        _sp.flipX = targetPoint.position.x > transform.position.x;
 
         // 移動先の位置に十分近づいたら、次の移動先を設定する。
         if (Vector3.Distance(transform.position, targetPoint.position) < 0.1f)
