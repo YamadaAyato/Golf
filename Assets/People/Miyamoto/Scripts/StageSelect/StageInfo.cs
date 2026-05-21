@@ -14,7 +14,9 @@ public class StageInfo
         var clearedCount = _stageData.GetClearedCount(_stars.Length);
         for (var i = 0; i < clearedCount; i++)
         {
-            _stars[i].color = Color.yellow;
+            var anim = _stars[i].GetComponent<Animator>();
+
+            anim.SetBool("IsComplete", true);
         }
     }
 }

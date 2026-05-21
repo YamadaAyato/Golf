@@ -18,23 +18,31 @@ public class SelectDirection : MonoBehaviour
             float dir = ctx.ReadValue<float>();
             OnSelectDirection?.Invoke((int)dir);
             _isSelecting = false;
-            _image.enabled = _isSelecting;
+            foreach (var image in _images)
+            {
+                image.enabled = _isSelecting;
+            }
         }
     }
     public void Selecting()
     {
         _isSelecting = !_isSelecting;
-        _image.enabled = _isSelecting;
+        Debug.Log($"{_isSelecting}");
+        foreach (var image in _images)
+        {
+            image.enabled = _isSelecting;
+        }
     }
-
+    [SerializeField] private Image[] _images;
     private GolfInputAction _action; 
-    private Image _image;
     private bool _isSelecting = false;
     private void Awake()
     {
         _action = new();
-        _image = GetComponent<Image>();
-        _image.enabled = false;
+        foreach (var image in _images)
+        {
+            image.enabled = false;
+        }
     }
     private void OnEnable()
     {
