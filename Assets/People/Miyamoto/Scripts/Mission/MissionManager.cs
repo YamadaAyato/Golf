@@ -10,6 +10,7 @@ public class MissionManager : MonoBehaviour
 
     private void Start()
     {
+        AudioManager.Instance.PlayBGM("BGM");
         foreach (var mission in _missions)
         {
             mission.Initialize();
