@@ -41,8 +41,9 @@ public class SelectDirection : MonoBehaviour
         _action.Enable();
         _action.Player.Direction.started += SelectHandler;
     }
-    private void OnDestroy()
+    private void OnDisable()
     {
         _action.Player.Direction.started -= SelectHandler;
+        _action.Disable();
     }
 }
