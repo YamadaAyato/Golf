@@ -18,6 +18,7 @@ public class GimmickBase : MonoBehaviour, IPointerClickHandler
     /// </summary>
     public void OnPointerClick(PointerEventData eventData)
     {
+        Debug.Log("クリック");
         _selectDirection.Selecting();
         _selectDirection.OnSelectDirection -= Rotate;
         _selectDirection.OnSelectDirection += Rotate;
