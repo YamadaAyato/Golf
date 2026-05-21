@@ -42,7 +42,7 @@ public class StageSelector : MonoBehaviour
         if (nextIndex < 0 || nextIndex > _stageInfos.Length - 1)
             return;
 
-        AudioManager.Instance.PlaySE("");
+        //AudioManager.Instance.PlaySE("");
         ImageUpdate(nextIndex);
         SetCurrentIndex(nextIndex);
     }
