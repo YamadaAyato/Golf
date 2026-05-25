@@ -1426,26 +1426,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: DirectionUI
       objectReference: {fileID: 0}
-    - target: {fileID: 3489316877545125246, guid: b1416d27378303643bd48c68ec4dcc6f, type: 3}
-      propertyPath: m_SizeDelta.x
-      value: 150
-      objectReference: {fileID: 0}
-    - target: {fileID: 3489316877545125246, guid: b1416d27378303643bd48c68ec4dcc6f, type: 3}
-      propertyPath: m_SizeDelta.y
-      value: 150
-      objectReference: {fileID: 0}
-    - target: {fileID: 3785836574954618614, guid: b1416d27378303643bd48c68ec4dcc6f, type: 3}
-      propertyPath: m_SizeDelta.x
-      value: 150
-      objectReference: {fileID: 0}
-    - target: {fileID: 3785836574954618614, guid: b1416d27378303643bd48c68ec4dcc6f, type: 3}
-      propertyPath: m_SizeDelta.y
-      value: 150
-      objectReference: {fileID: 0}
-    - target: {fileID: 5028268692063229884, guid: b1416d27378303643bd48c68ec4dcc6f, type: 3}
-      propertyPath: m_Sprite
-      value: 
-      objectReference: {fileID: 21300000, guid: 84336ead2bc884a4389f3d4e11093845, type: 3}
     - target: {fileID: 6544411127949493838, guid: b1416d27378303643bd48c68ec4dcc6f, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -1526,10 +1506,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 7412365761340816131, guid: b1416d27378303643bd48c68ec4dcc6f, type: 3}
-      propertyPath: m_Sprite
-      value: 
-      objectReference: {fileID: 21300000, guid: f88a3bde663a377419f80eeae083d5b7, type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
