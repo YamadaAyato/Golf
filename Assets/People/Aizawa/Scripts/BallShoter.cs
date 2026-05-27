@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using Template.Editor;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -82,7 +83,7 @@ public class BallShoter : MonoBehaviour
                 _onGroundChecker.Add(Physics2D.Linecast(transform.position  - new Vector3(-0.5f + (0.5f * i), i == 1 ? 0.5f : 0), transform.position - new Vector3(-0.5f + (0.5f * i), 0.6f)));
             }
 
-            if(_onGroundChecker.Count > 0)
+            if(_onGroundChecker.Count(ray => ray.collider != null) > 0)
             {
                 _rb2d.linearVelocity = Vector2.zero;
                 _nowPhase = ShotPhase.Angle;
@@ -137,7 +138,6 @@ public class BallShoter : MonoBehaviour
         _putterSwing.transform.parent = null;
 
         transform.eulerAngles = _shotPowerUI.transform.eulerAngles;
-        _relativeDirection = 1;
         _rb2d.AddForce(transform.right * _shotPowerBase * (Mathf.PingPong(_shotPower += 1.5f, _maxShotPower) / _maxShotPower), ForceMode2D.Impulse);
         AudioManager.Instance.PlaySE("Shot");
 
@@ -169,7 +169,6 @@ public class BallShoter : MonoBehaviour
 
         _shotAngle = 0f;
         _shotPower = 0f;
-        _relativeDirection = 1f;
         _nowPhase = ShotPhase.Wait;
         _canEnterShotMode = false;
 
