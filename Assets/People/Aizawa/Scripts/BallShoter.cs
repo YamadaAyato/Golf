@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using Template.Editor;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -24,7 +25,7 @@ public class BallShoter : MonoBehaviour
     private float _shotAngle = 0;
     private float _shotPower = 0;
     private float _relativeDirection = 1;
-    private RaycastHit2D _onGroundChecker;
+    private List<RaycastHit2D> _onGroundChecker = new();
     private Transform _startPoint;
     private bool _canEnterShotMode;
 
@@ -75,9 +76,13 @@ public class BallShoter : MonoBehaviour
                 return;
             }
 
-            _onGroundChecker = Physics2D.Linecast(transform.position  - new Vector3(0, 0.5f), transform.position - new Vector3(0, 0.6f));
+            _onGroundChecker.Clear();
+            for(int i = 0; i < 3; i++)
+            {
+                _onGroundChecker.Add(Physics2D.Linecast(transform.position  - new Vector3(-0.5f + (0.5f * i), i == 1 ? 0.5f : 0), transform.position - new Vector3(-0.5f + (0.5f * i), 0.6f)));
+            }
 
-            if(_onGroundChecker.collider != null)
+            if(_onGroundChecker.Count > 0)
             {
                 _rb2d.linearVelocity = Vector2.zero;
                 _nowPhase = ShotPhase.Angle;
