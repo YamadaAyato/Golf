@@ -1426,6 +1426,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: DirectionUI
       objectReference: {fileID: 0}
+    - target: {fileID: 4319390617334794259, guid: b1416d27378303643bd48c68ec4dcc6f, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6544411127949493838, guid: b1416d27378303643bd48c68ec4dcc6f, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -1505,6 +1509,10 @@ PrefabInstance:
     - target: {fileID: 6544411127949493838, guid: b1416d27378303643bd48c68ec4dcc6f, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7655575528294590875, guid: b1416d27378303643bd48c68ec4dcc6f, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
