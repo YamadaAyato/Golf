@@ -24,7 +24,7 @@ public class RotateCountMission : IMission, IDisposable
     }
     private void TextUpdate()
     {
-        _rotateCountText.text = $"{_currentRotateCount}/{_maxRotateCount}回以内にゴールしろ";
+        _rotateCountText.text = $"ブロックを回す数を {_currentRotateCount}/{_maxRotateCount}回以内にゴールしろ";
     }
     private void OnRotateHandler(int a)
     {
