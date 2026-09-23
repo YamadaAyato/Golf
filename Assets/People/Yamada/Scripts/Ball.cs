@@ -1,22 +1,23 @@
-using System.Threading.Tasks;
+using System.Collections;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 public class Ball : MonoBehaviour
 {
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if(collision.CompareTag("Goal"))
+        if (collision.CompareTag("Goal"))
         {
-            LoadSceneMode();
+            StartCoroutine(LoadSceneMode());
             Debug.Log("Goal!");
         }
     }
 
-    private async void LoadSceneMode()
+    private IEnumerator LoadSceneMode()
     {
         AudioManager.Instance.PlaySE("Clear");
-        await Task.Delay(3000);
+
+        yield return new WaitForSeconds(3f);
+
         FadeSceneLoader.Instance.LoadScene("StageSelect");
     }
 }
